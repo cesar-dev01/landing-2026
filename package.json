@@ -20,6 +20,7 @@
     "@astrojs/vercel": "latest",
     "@fortawesome/fontawesome-svg-core": "latest",
     "@fortawesome/free-brands-svg-icons": "latest",
+    "@lucide/astro": "^1.31.0",
     "@portabletext/types": "latest",
     "@sanity/astro": "latest",
     "@sanity/client": "latest",
