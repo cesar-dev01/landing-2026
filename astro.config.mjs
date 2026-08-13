@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
 import vercel from '@astrojs/vercel';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
@@ -19,6 +20,7 @@ export default defineConfig({
     ...(projectId
       ? [sanity({ projectId, dataset, useCdn: false, studioBasePath: '/admin' })]
       : []),
+    react(),
   ],
   vite: {
     plugins: [tailwindcss()],

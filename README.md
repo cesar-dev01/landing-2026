@@ -76,9 +76,21 @@ Si no se configura Sanity, el sitio utiliza tres artículos de demostración loc
    npm run studio
    ```
 
+   Sanity Studio utiliza React y `styled-components`; estas dependencias están declaradas directamente en el proyecto. También puedes acceder al Studio integrado en `/admin` cuando las variables de Sanity estén configuradas.
+
 4. Crear primero un autor y categorías; después publicar artículos.
 
 El modelo separa autor, categoría y artículo mediante referencias. Cada artículo incluye slug, resumen, fecha, imagen con texto alternativo, Portable Text y metadatos SEO opcionales. Sanity genera los IDs de los documentos normales.
+
+### Carga inicial de contenido
+
+El proyecto incluye una carga idempotente para crear el autor, seis categorías y tres artículos editoriales con sus imágenes:
+
+```bash
+npm run sanity:seed
+```
+
+El script crea IDs normales desde Sanity, conserva las relaciones mediante referencias y omite artículos que ya existan con el mismo slug. Los recursos fuente están en `scripts/seed-assets/`. La fotografía auténtica del autor debe añadirse manualmente desde Studio cuando esté disponible; no se utiliza un rostro generado para representar a una persona real.
 
 ## Despliegue en Vercel
 
