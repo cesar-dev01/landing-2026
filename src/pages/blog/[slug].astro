@@ -2,15 +2,16 @@
 import { PortableText } from 'astro-portabletext';
 import Layout from '@/layouts/Layout.astro';
 import ShareButtons from '@/components/ShareButtons.astro';
-import { getPosts } from '@/lib/sanity';
+import { getPost, getPosts } from '@/lib/sanity';
 import { SITE } from '@/data/site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.slug } }));
 }
 
-const { post } = Astro.props;
+const { slug } = Astro.params;
+const post = slug ? await getPost(slug) : undefined;
 if (!post) return Astro.redirect('/404');
 const date = new Intl.DateTimeFormat('es-PE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(post.publishedAt));
 const articleUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
