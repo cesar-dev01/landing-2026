@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #01193f;
+  --color-ink-deep: #011435;
+  --color-gold: #d7a451;
+  --color-blue: #0443ac;
+  --color-paper: #fbfbfb;
+  --font-sans: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-display: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+:root { color-scheme: light; font-synthesis: none; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body { margin: 0; background: #fbfbfb; color: #011435; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: #d7a451; color: #011435; }
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #d7a451; outline-offset: 3px; }
+.container-site { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+.eyebrow { color: #0443ac; font-size: .75rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.display { font-family: var(--font-display); letter-spacing: -.045em; text-wrap: balance; }
+.copy-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+.section-space { padding-block: clamp(4.5rem, 9vw, 8rem); }
+.card-shadow { box-shadow: 0 18px 60px rgb(1 20 53 / .08); }
+.prose-ra { color: #22304b; font-size: 1.075rem; line-height: 1.85; }
+.prose-ra :where(h2,h3) { color: #011435; font-family: var(--font-display); letter-spacing: -.03em; line-height: 1.15; margin-top: 2.5em; margin-bottom: .75em; }
+.prose-ra h2 { font-size: clamp(1.65rem, 3vw, 2.2rem); }
+.prose-ra h3 { font-size: 1.35rem; }
+.prose-ra p, .prose-ra ul, .prose-ra ol { margin-block: 1.15em; }
+.prose-ra a { color: #0443ac; text-decoration: underline; text-underline-offset: 3px; }
+.prose-ra blockquote { border-left: 3px solid #d7a451; color: #01193f; font-size: 1.25rem; font-weight: 600; margin: 2rem 0; padding-left: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

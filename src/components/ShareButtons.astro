@@ -1,0 +1,68 @@
+---
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faFacebookF, faLinkedinIn, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+
+interface Props {
+  title: string;
+  url: string;
+}
+
+const { title, url } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedText = encodeURIComponent(`${title} — Richard Agapito`);
+const icons = {
+  facebook: icon(faFacebookF).html.join(''),
+  linkedin: icon(faLinkedinIn).html.join(''),
+  whatsapp: icon(faWhatsapp).html.join(''),
+};
+---
+<nav class="flex flex-wrap items-center gap-3" data-share-group data-share-title={title} aria-label="Compartir este artículo">
+  <span class="text-xs font-bold uppercase tracking-[.14em] text-white/55">Compartir</span>
+  <div class="flex items-center gap-2">
+    <a
+      href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+      data-share="facebook"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Compartir en Facebook"
+      aria-label="Compartir en Facebook"
+      class="grid size-10 place-items-center rounded-full border border-white/20 text-white transition hover:border-[#1877F2] hover:bg-[#1877F2] [&_svg]:size-4"
+      set:html={icons.facebook}
+    />
+    <a
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+      data-share="linkedin"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Compartir en LinkedIn"
+      aria-label="Compartir en LinkedIn"
+      class="grid size-10 place-items-center rounded-full border border-white/20 text-white transition hover:border-[#0A66C2] hover:bg-[#0A66C2] [&_svg]:size-4"
+      set:html={icons.linkedin}
+    />
+    <a
+      href={`https://wa.me/?text=${encodedText}%20${encodedUrl}`}
+      data-share="whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Compartir por WhatsApp"
+      aria-label="Compartir por WhatsApp"
+      class="grid size-10 place-items-center rounded-full border border-white/20 text-white transition hover:border-[#25D366] hover:bg-[#25D366] [&_svg]:size-[1.1rem]"
+      set:html={icons.whatsapp}
+    />
+  </div>
+</nav>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-share-group]').forEach((group) => {
+    const currentUrl = window.location.href.split('#')[0];
+    const articleTitle = group.dataset.shareTitle || document.title;
+    const text = `${articleTitle} — Richard Agapito`;
+
+    group.querySelectorAll<HTMLAnchorElement>('[data-share]').forEach((link) => {
+      const network = link.dataset.share;
+      if (network === 'facebook') link.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+      if (network === 'linkedin') link.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+      if (network === 'whatsapp') link.href = `https://wa.me/?text=${encodeURIComponent(`${text} ${currentUrl}`)}`;
+    });
+  });
+</script>

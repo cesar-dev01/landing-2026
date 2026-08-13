@@ -1,0 +1,16 @@
+---
+import type { BlogPost } from '@/data/fallbackPosts';
+const { post, featured = false } = Astro.props as { post: BlogPost; featured?: boolean };
+const date = new Intl.DateTimeFormat('es-PE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(post.publishedAt));
+---
+<article class:list={["group relative h-full overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-gold/70 hover:shadow-xl", featured && 'md:grid md:grid-cols-[1.15fr_.85fr]']}>
+  <div class:list={["relative overflow-hidden bg-ink", featured ? 'min-h-72' : 'aspect-[16/9]']}>
+    {post.mainImage?.asset?.url ? <img src={post.mainImage.asset.url} alt={post.mainImage.alt || ''} width={post.mainImage.asset.metadata?.dimensions?.width || 900} height={post.mainImage.asset.metadata?.dimensions?.height || 506} loading="lazy" decoding="async" class="size-full object-cover transition duration-500 group-hover:scale-[1.02]" /> : <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(215,164,81,.75),transparent_24%),linear-gradient(145deg,#0443AC,#011435_65%)]"><span class="absolute bottom-6 left-6 text-5xl font-black text-white/10" aria-hidden="true">RA</span></div>}
+  </div>
+  <div class:list={["flex flex-col p-6", featured && 'justify-center md:p-10']}>
+    <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[.12em] text-blue"><span>{post.categories[0]?.title || 'Tributación'}</span><span class="size-1 rounded-full bg-gold"></span><time datetime={post.publishedAt}>{date}</time></div>
+    <h2 class:list={["display mt-4 font-extrabold leading-tight text-ink-deep", featured ? 'text-3xl md:text-4xl' : 'text-2xl']}><a href={`/blog/${post.slug}/`} class="after:absolute after:inset-0">{post.title}</a></h2>
+    <p class="mt-4 text-sm leading-6 text-slate-600">{post.excerpt}</p>
+    <span class="mt-6 text-sm font-extrabold text-ink">Leer análisis <span class="text-gold transition group-hover:translate-x-1" aria-hidden="true">→</span></span>
+  </div>
+</article>

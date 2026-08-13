@@ -1,0 +1,38 @@
+{
+  "name": "richard-agapito-tributario",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "images:og": "node scripts/generate-og.mjs",
+    "studio": "sanity dev",
+    "studio:build": "sanity build"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "@astrojs/vercel": "latest",
+    "@fortawesome/fontawesome-svg-core": "latest",
+    "@fortawesome/free-brands-svg-icons": "latest",
+    "@portabletext/types": "latest",
+    "@sanity/astro": "latest",
+    "@sanity/client": "latest",
+    "@sanity/icons": "latest",
+    "@sanity/image-url": "latest",
+    "@sanity/vision": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "astro-portabletext": "latest",
+    "groq": "latest",
+    "sanity": "latest",
+    "sharp": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "typescript": "latest"
+  }
+}
