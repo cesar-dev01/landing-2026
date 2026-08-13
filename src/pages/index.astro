@@ -1,0 +1,64 @@
+---
+import { Picture } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getPosts } from '@/lib/sanity';
+import { SITE } from '@/data/site';
+import hero from '@/assets/hero-consultoria.png';
+
+const posts = (await getPosts()).slice(0, 3);
+const services = [
+  { n: '01', title: 'Diagnóstico tributario', text: 'Identificación y priorización de contingencias para convertir riesgos en un plan de acción concreto.' },
+  { n: '02', title: 'Fiscalizaciones SUNAT', text: 'Estrategia, preparación documental y acompañamiento técnico durante requerimientos y auditorías.' },
+  { n: '03', title: 'Consultoría especializada', text: 'Análisis de Impuesto a la Renta, IGV, no domiciliados y operaciones de alta complejidad.' },
+  { n: '04', title: 'Procedimientos tributarios', text: 'Asistencia en reclamaciones, respuestas y sustentos con criterio técnico y trazabilidad.' },
+];
+const faq = [
+  ['¿Qué tipo de empresas asesora?', 'Empresas nacionales y transnacionales de distintos sectores que requieren prevenir contingencias, atender una fiscalización o analizar una operación específica.'],
+  ['¿La asesoría puede ser preventiva?', 'Sí. El diagnóstico preventivo permite revisar procesos, declaraciones y sustentos antes de una revisión de SUNAT o de una decisión empresarial relevante.'],
+  ['¿Cómo se inicia una consulta?', 'Escríbenos por WhatsApp indicando brevemente el asunto. Coordinaremos una conversación inicial para comprender el caso, el alcance y los plazos.'],
+];
+---
+<Layout title="Richard Agapito | Asesor y consultor tributario en Perú" description="Asesoría tributaria especializada para empresas: fiscalizaciones SUNAT, diagnóstico tributario, Impuesto a la Renta, IGV y no domiciliados.">
+  <section class="relative min-h-[92svh] overflow-hidden bg-ink-deep pt-18 text-white">
+    <Picture src={hero} formats={['avif', 'webp']} widths={[768, 1200, 1600]} sizes="(max-width: 768px) 100vw, 58vw" alt="Consultor tributario revisando información financiera en una oficina" loading="eager" fetchpriority="high" class="absolute inset-0 size-full object-cover object-[62%_center] opacity-60 md:left-[42%] md:w-[58%] md:opacity-90" />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,#011435_0%,#011435_39%,rgba(1,20,53,.78)_58%,rgba(1,20,53,.15)_100%)]"></div>
+    <div class="container-site relative grid min-h-[calc(92svh-4.5rem)] items-center py-20 lg:grid-cols-[.95fr_1.05fr]">
+      <div class="max-w-3xl">
+        <p class="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[.18em] text-gold"><span class="h-px w-8 bg-gold"></span>Asesoría tributaria estratégica</p>
+        <h1 class="display mt-6 text-[clamp(3rem,7vw,6.3rem)] font-extrabold leading-[.91]">Decisiones firmes.<br/><span class="text-gold">Riesgos bajo control.</span></h1>
+        <p class="mt-7 max-w-xl text-base leading-7 text-white/72 md:text-lg">Más de 14 años acompañando a empresas en asuntos tributarios complejos, con análisis riguroso, respuestas claras y enfoque preventivo.</p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row"><a href={SITE.whatsapp('Hola Richard, quisiera solicitar una evaluación inicial de mi caso tributario.')} target="_blank" rel="noopener noreferrer" class="rounded-full bg-gold px-7 py-4 text-center text-sm font-extrabold text-ink-deep transition hover:bg-white">Solicitar evaluación <span aria-hidden="true">↗</span></a><a href="#servicios" class="rounded-full border border-white/25 px-7 py-4 text-center text-sm font-bold transition hover:border-white hover:bg-white/10">Explorar servicios</a></div>
+        <div class="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t border-white/14 pt-6 text-sm text-white/60"><p><strong class="block text-xl text-white">14+ años</strong>de experiencia</p><p><strong class="block text-xl text-white">Perú</strong>alcance nacional</p><p><strong class="block text-xl text-white">Empresas</strong>nacionales y globales</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section-space bg-paper">
+    <div class="container-site">
+      <div class="grid gap-8 md:grid-cols-[.7fr_1.3fr] md:items-end"><div><p class="eyebrow">Áreas de práctica</p><h2 class="display mt-4 text-4xl font-extrabold leading-tight text-ink-deep md:text-5xl">La claridad técnica que tu empresa necesita.</h2></div><p class="max-w-xl text-pretty text-base leading-7 text-slate-600 md:justify-self-end">Cada servicio parte de comprender el negocio, evaluar la evidencia y proponer una ruta que pueda ejecutarse. Sin respuestas genéricas.</p></div>
+      <div class="mt-14 grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2">{services.map((service) => <article class="group bg-white p-7 transition hover:bg-ink-deep sm:p-9"><div class="flex items-start justify-between"><span class="font-display text-xs font-black tracking-[.18em] text-gold">{service.n}</span><span class="text-xl text-gold transition group-hover:translate-x-1" aria-hidden="true">↗</span></div><h3 class="display mt-10 text-2xl font-extrabold text-ink-deep group-hover:text-white">{service.title}</h3><p class="mt-4 max-w-md text-sm leading-6 text-slate-600 group-hover:text-white/65">{service.text}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section id="experiencia" class="section-space overflow-hidden bg-white">
+    <div class="container-site grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <div class="relative rounded-[2rem] bg-ink-deep p-8 text-white sm:p-12"><div class="absolute -right-10 -top-10 size-36 rounded-full border-[26px] border-gold/15"></div><p class="text-7xl font-black leading-none text-gold">14<span class="text-3xl">+</span></p><p class="mt-3 max-w-xs text-xl font-bold leading-snug">años asesorando empresas y profesionales.</p><div class="my-9 h-px bg-white/12"></div><blockquote class="text-pretty text-lg leading-8 text-white/78">“Richard es una persona muy estudiosa, analítica, que aplica buenos criterios.”</blockquote><p class="mt-5 text-sm font-bold text-gold">Edwin Meza Romero <span class="font-normal text-white/45">· Recomendación en LinkedIn</span></p></div>
+      <div><p class="eyebrow">Experiencia que respalda</p><h2 class="display mt-4 text-4xl font-extrabold leading-tight text-ink-deep md:text-5xl">Criterio, método y visión de negocio.</h2><p class="mt-6 text-pretty text-base leading-7 text-slate-600">Richard Agapito Custodio es asesor y consultor tributario de empresas nacionales y transnacionales. Ha atendido fiscalizaciones, diagnósticos y procedimientos vinculados con Impuesto a la Renta, IGV, no domiciliados y fiscalidad internacional.</p><div class="mt-8 grid gap-4 sm:grid-cols-2"><div class="rounded-2xl border border-ink/10 p-5"><p class="font-extrabold text-ink">Experiencia Big Four</p><p class="mt-2 text-sm leading-6 text-slate-600">Exasociado de Tax & Legal en KPMG Perú.</p></div><div class="rounded-2xl border border-ink/10 p-5"><p class="font-extrabold text-ink">Formación especializada</p><p class="mt-2 text-sm leading-6 text-slate-600">Maestría en Derecho Tributario y Fiscalidad Internacional.</p></div><div class="rounded-2xl border border-ink/10 p-5 sm:col-span-2"><p class="font-extrabold text-ink">Docente y autor</p><p class="mt-2 text-sm leading-6 text-slate-600">Expositor en programas de especialización, coautor de publicaciones y divulgador de actualidad tributaria.</p></div></div></div>
+    </div>
+  </section>
+
+  <section class="section-space bg-ink text-white">
+    <div class="container-site"><div class="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><p class="text-xs font-bold uppercase tracking-[.18em] text-gold">Cómo trabajamos</p><h2 class="display mt-4 text-4xl font-extrabold leading-tight md:text-5xl">Del problema a una ruta clara.</h2></div><ol class="grid gap-5 sm:grid-cols-3"><li class="border-t border-white/20 pt-5"><span class="text-xs font-black text-gold">01</span><h3 class="mt-5 font-display text-xl font-extrabold">Entender</h3><p class="mt-3 text-sm leading-6 text-white/60">Contexto, operación, documentos y objetivo.</p></li><li class="border-t border-white/20 pt-5"><span class="text-xs font-black text-gold">02</span><h3 class="mt-5 font-display text-xl font-extrabold">Analizar</h3><p class="mt-3 text-sm leading-6 text-white/60">Riesgos, posición técnica y alternativas.</p></li><li class="border-t border-white/20 pt-5"><span class="text-xs font-black text-gold">03</span><h3 class="mt-5 font-display text-xl font-extrabold">Actuar</h3><p class="mt-3 text-sm leading-6 text-white/60">Plan, sustentos y acompañamiento.</p></li></ol></div></div>
+  </section>
+
+  <section class="section-space bg-paper">
+    <div class="container-site"><div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"><div><p class="eyebrow">Criterio tributario</p><h2 class="display mt-4 text-4xl font-extrabold text-ink-deep md:text-5xl">Análisis para decidir mejor.</h2></div><a href="/blog/" class="text-sm font-extrabold text-ink hover:text-blue">Ver todos los artículos <span class="text-gold">→</span></a></div><div class="mt-12 grid gap-6 md:grid-cols-3">{posts.map((post) => <PostCard post={post} />)}</div></div>
+  </section>
+
+  <section class="section-space bg-white">
+    <div class="container-site grid gap-12 lg:grid-cols-[.75fr_1.25fr]"><div><p class="eyebrow">Preguntas frecuentes</p><h2 class="display mt-4 text-4xl font-extrabold text-ink-deep">Antes de conversar.</h2></div><div class="divide-y divide-ink/10 border-y border-ink/10">{faq.map(([question, answer], i) => <details class="group py-6" open={i === 0}><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-extrabold text-ink-deep"><span>{question}</span><span class="text-gold transition group-open:rotate-45" aria-hidden="true">＋</span></summary><p class="mt-4 max-w-2xl pr-8 text-sm leading-6 text-slate-600">{answer}</p></details>)}</div></div>
+  </section>
+
+  <section class="bg-gold py-16 text-ink-deep"><div class="container-site flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"><div><p class="text-xs font-black uppercase tracking-[.18em]">¿Tienes una consulta tributaria?</p><h2 class="display mt-3 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">Conversemos antes de que el riesgo se convierta en urgencia.</h2></div><a href={SITE.whatsapp('Hola Richard, quisiera conversar sobre una consulta tributaria para mi empresa.')} target="_blank" rel="noopener noreferrer" class="shrink-0 rounded-full bg-ink-deep px-8 py-4 text-center text-sm font-extrabold text-white transition hover:bg-blue">Escribir por WhatsApp <span aria-hidden="true">↗</span></a></div></section>
+</Layout>

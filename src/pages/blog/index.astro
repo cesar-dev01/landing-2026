@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getPosts } from '@/lib/sanity';
+const posts = await getPosts();
+const [featured, ...rest] = posts;
+---
+<Layout title="Blog tributario | Richard Agapito" description="Análisis sobre fiscalizaciones SUNAT, Impuesto a la Renta, IGV, crédito fiscal, no domiciliados y gestión de riesgos tributarios.">
+  <section class="bg-ink-deep pb-24 pt-36 text-white"><div class="container-site"><p class="text-xs font-bold uppercase tracking-[.18em] text-gold">Blog tributario</p><h1 class="display mt-5 max-w-4xl text-5xl font-extrabold leading-[.98] md:text-7xl">Ideas claras para decisiones <span class="text-gold">bien sustentadas.</span></h1><p class="mt-7 max-w-2xl text-base leading-7 text-white/65">Actualidad, criterios y herramientas prácticas para gestionar obligaciones y contingencias tributarias en la empresa.</p></div></section>
+  <section class="section-space bg-paper"><div class="container-site">{featured ? <PostCard post={featured} featured /> : <p>No hay artículos publicados todavía.</p>}{rest.length > 0 && <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{rest.map((post) => <PostCard post={post} />)}</div>}</div></section>
+</Layout>

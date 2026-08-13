@@ -1,0 +1,33 @@
+---
+import { SITE } from '@/data/site';
+const current = Astro.url.pathname;
+---
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink-deep/95 text-white backdrop-blur-md">
+  <div class="container-site flex h-18 items-center justify-between">
+    <a href="/" class="flex items-center gap-3" aria-label="Richard Agapito, inicio">
+      <span class="grid size-10 place-items-center rounded-full border border-gold/60 font-display text-sm font-extrabold tracking-tight text-gold">RA</span>
+      <span class="hidden leading-tight sm:block"><strong class="block font-display text-sm tracking-tight">Richard Agapito</strong><span class="text-[.68rem] uppercase tracking-[.16em] text-white/60">Consultor tributario</span></span>
+    </a>
+    <nav class="hidden items-center gap-7 text-sm font-semibold md:flex" aria-label="Navegación principal">
+      <a class="transition hover:text-gold" href={current === '/' ? '#servicios' : '/#servicios'}>Servicios</a>
+      <a class="transition hover:text-gold" href={current === '/' ? '#experiencia' : '/#experiencia'}>Experiencia</a>
+      <a class:list={["transition hover:text-gold", current.startsWith('/blog') && 'text-gold']} href="/blog/">Blog</a>
+      <a class="rounded-full bg-gold px-5 py-2.5 text-ink-deep transition hover:bg-white" href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer">Conversemos <span aria-hidden="true">↗</span></a>
+    </nav>
+    <button id="menu-button" class="grid size-11 place-items-center rounded-full border border-white/20 md:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="text-xl" aria-hidden="true">≡</span></button>
+  </div>
+  <nav id="mobile-menu" class="container-site hidden border-t border-white/10 py-5 md:hidden" aria-label="Navegación móvil">
+    <div class="grid gap-1 text-base font-semibold">
+      <a class="rounded-lg px-3 py-3 hover:bg-white/10" href="/#servicios">Servicios</a>
+      <a class="rounded-lg px-3 py-3 hover:bg-white/10" href="/#experiencia">Experiencia</a>
+      <a class="rounded-lg px-3 py-3 hover:bg-white/10" href="/blog/">Blog</a>
+      <a class="mt-2 rounded-full bg-gold px-5 py-3 text-center text-ink-deep" href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+    </div>
+  </nav>
+</header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#menu-button');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  button?.addEventListener('click', () => { const open = button.getAttribute('aria-expanded') === 'true'; button.setAttribute('aria-expanded', String(!open)); button.setAttribute('aria-label', open ? 'Abrir menú' : 'Cerrar menú'); menu?.classList.toggle('hidden'); });
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { button?.setAttribute('aria-expanded', 'false'); button?.setAttribute('aria-label', 'Abrir menú'); menu?.classList.add('hidden'); }));
+</script>
