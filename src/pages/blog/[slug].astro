@@ -1,9 +1,13 @@
 ---
 import { PortableText } from 'astro-portabletext';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Layout from '@/layouts/Layout.astro';
 import ShareButtons from '@/components/ShareButtons.astro';
 import { getPost, getPosts } from '@/lib/sanity';
 import { SITE } from '@/data/site';
+
+const whatsappIcon = icon(faWhatsapp).html.join('');
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -29,9 +33,11 @@ const articleSchema = {
   <article>
     <header class="bg-ink-deep pb-20 pt-36 text-white">
       <div class="container-site max-w-5xl">
-        <a href="/blog/" class="text-xs font-extrabold uppercase tracking-[.16em] text-gold hover:text-white">← Volver al blog</a>
-        <div class="mt-8 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[.12em] text-white/55"><span class="text-gold">{post.categories[0]?.title || 'Tributación'}</span><span class="size-1 rounded-full bg-white/30"></span><time datetime={post.publishedAt}>{date}</time></div>
-        <h1 class="display mt-6 max-w-4xl text-4xl font-extrabold leading-[1.04] md:text-6xl">{post.title}</h1>
+        <div class="flex flex-column md:flex-row w-full gap-8 items-center"> 
+        <a href="/blog/" class="text-xs font-extrabold uppercase tracking-[.16em] text-gold hover:text-white">← Volver</a>
+        <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[.10em] text-white/55"><span class="bg-white/0 px-2 py-1.5 rounded-full border border-dashed border-white/60 text-gold text-[10px]">{post.categories[0]?.title || 'Tributación'}</span><span class="size-1 rounded-full bg-white/30"></span><time class="text-[12px] lowercase" datetime={post.publishedAt}>{date}</time></div>
+        </div>
+        <h1 class="display mt-6 max-w-4xl text-4xl font-bold leading-[1.04] md:text-5xl">{post.title}</h1>
         <p class="mt-6 max-w-3xl text-lg leading-8 text-white/65">{post.excerpt}</p>
         <div class="mt-8 flex flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-6">
           <p class="text-sm font-bold">Por {post.author?.name || SITE.name}</p>
@@ -39,10 +45,10 @@ const articleSchema = {
         </div>
       </div>
     </header>
-    {post.mainImage?.asset?.url && <div class="container-site -mt-8"><img src={post.mainImage.asset.url} alt={post.mainImage.alt || ''} width={post.mainImage.asset.metadata?.dimensions?.width || 1200} height={post.mainImage.asset.metadata?.dimensions?.height || 675} class="aspect-[16/8] w-full rounded-[2rem] object-cover shadow-2xl" /></div>}
+    {post.mainImage?.asset?.url && <div class="container-site -mt-8"><img src={post.mainImage.asset.url} alt={post.mainImage.alt || ''} width={post.mainImage.asset.metadata?.dimensions?.width || 1200} height={post.mainImage.asset.metadata?.dimensions?.height || 675} class="aspect-[16/7] w-full rounded-[1.5rem] object-cover shadow-2xl" /></div>}
     <div class="container-site grid gap-10 py-16 lg:grid-cols-[1fr_16rem] lg:py-24">
       <div class="prose-ra max-w-3xl"><PortableText value={post.body} /></div>
-      <aside class="order-first lg:order-last"><div class="sticky top-28 rounded-2xl border border-ink/10 bg-white p-6 card-shadow"><p class="eyebrow">¿Necesitas apoyo?</p><p class="mt-4 text-sm leading-6 text-slate-600">Revisemos el contexto de tu empresa y definamos los siguientes pasos.</p><a href={SITE.whatsapp(`Hola Richard, leí el artículo “${post.title}” y quisiera hacer una consulta.`)} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full bg-gold px-5 py-3 text-center text-sm font-extrabold text-ink-deep hover:bg-ink hover:text-white">Conversar por WhatsApp</a></div></aside>
+      <aside class="order-first lg:order-last"><div class="sticky top-28 rounded-2xl border border-ink/10 bg-white p-6 card-shadow"><p class="eyebrow">¿Necesitas apoyo?</p><p class="mt-4 text-sm leading-6 text-slate-600">Revisemos el contexto de tu empresa y definamos los siguientes pasos.</p><a href={SITE.whatsapp(`Hola Richard, leí el artículo “${post.title}” y quisiera hacer una consulta.`)} target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-center text-sm font-extrabold text-ink-deep hover:bg-ink hover:text-white [&_svg]:size-[1.1rem]">Conversar <span aria-hidden="true" set:html={whatsappIcon} /></a></div></aside>
     </div>
   </article>
 </Layout>

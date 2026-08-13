@@ -1,7 +1,10 @@
 ---
-import { MessageCircle } from '@lucide/astro';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { SITE } from '@/data/site';
+
+const whatsappIcon = icon(faWhatsapp).html.join('');
 ---
-<a href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer" aria-label="Contactar a Richard por WhatsApp" class="fixed bottom-5 right-5 z-40 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_35px_rgba(1,20,53,.28)] transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-7 sm:right-7">
-  <MessageCircle size={30} stroke-width={2.2} aria-hidden="true" />
+<a href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer" aria-label="Contactar a Richard por WhatsApp" class="fixed bottom-5 right-5 z-40 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_35px_rgba(1,20,53,.28)] transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-7 sm:right-7 [&_svg]:size-7">
+  <span aria-hidden="true" set:html={whatsappIcon} />
 </a>

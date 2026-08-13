@@ -1,18 +1,25 @@
 ---
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { SITE } from '@/data/site';
+
 const current = Astro.url.pathname;
+const whatsappIcon = icon(faWhatsapp).html.join('');
 ---
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink-deep/95 text-white backdrop-blur-md">
   <div class="container-site flex h-18 items-center justify-between">
-    <a href="/" class="flex items-center gap-3" aria-label="Richard Agapito, inicio">
-      <span class="grid size-10 place-items-center rounded-full border border-gold/60 font-display text-sm font-extrabold tracking-tight text-gold">RA</span>
-      <span class="hidden leading-tight sm:block"><strong class="block font-display text-sm tracking-tight">Richard Agapito</strong><span class="text-[.68rem] uppercase tracking-[.16em] text-white/60">Consultor tributario</span></span>
+    <a href="/" class="flex shrink-0 items-center gap-2.5" aria-label="Richard Agapito, inicio">
+      <img src="/brand/logo-symbol-white.svg" alt="" class="h-10 w-auto sm:h-11" aria-hidden="true" />
+      <span class="leading-none">
+        <strong class="block font-display text-[.82rem] font-black tracking-[.025em] text-white sm:text-sm">RICHARD AGAPITO</strong>
+        <span class="mt-1.5 block text-[.68rem] font-semibold tracking-[.09em] text-white/80 sm:text-xs">Tax &amp; Legal</span>
+      </span>
     </a>
     <nav class="hidden items-center gap-7 text-sm font-semibold md:flex" aria-label="Navegación principal">
       <a class="transition hover:text-gold" href={current === '/' ? '#servicios' : '/#servicios'}>Servicios</a>
       <a class="transition hover:text-gold" href={current === '/' ? '#experiencia' : '/#experiencia'}>Experiencia</a>
       <a class:list={["transition hover:text-gold", current.startsWith('/blog') && 'text-gold']} href="/blog/">Blog</a>
-      <a class="rounded-full bg-gold px-5 py-2.5 text-ink-deep transition hover:bg-white" href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer">Conversemos <span aria-hidden="true">↗</span></a>
+      <a class="flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-ink-deep transition hover:bg-white [&_svg]:size-4" href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer">Conversemos <span aria-hidden="true" set:html={whatsappIcon} /></a>
     </nav>
     <button id="menu-button" class="grid size-11 place-items-center rounded-full border border-white/20 md:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="text-xl" aria-hidden="true">≡</span></button>
   </div>

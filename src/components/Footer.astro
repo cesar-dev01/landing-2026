@@ -4,7 +4,16 @@ const year = new Date().getFullYear();
 ---
 <footer class="bg-ink-deep py-12 text-white">
   <div class="container-site grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
-    <div><a href="/" class="font-display text-xl font-extrabold">Richard Agapito<span class="text-gold">.</span></a><p class="mt-4 max-w-sm text-sm leading-6 text-white/60">Asesoría tributaria especializada para empresas que buscan prevenir riesgos y tomar decisiones con claridad.</p></div>
+    <div>
+      <a href="/" class="inline-flex items-center gap-3" aria-label="Richard Agapito, inicio">
+        <img src="/brand/logo-symbol-white.svg" alt="" class="h-11 w-auto" aria-hidden="true" />
+        <span class="leading-none">
+          <strong class="block font-display text-sm font-black tracking-[.025em] text-white">RICHARD AGAPITO</strong>
+          <span class="mt-1.5 block text-xs font-semibold tracking-[.09em] text-white/80">Tax &amp; Legal</span>
+        </span>
+      </a>
+      <p class="mt-4 max-w-sm text-sm leading-6 text-white/60">Asesoría tributaria especializada para empresas que buscan prevenir riesgos y tomar decisiones con claridad.</p>
+    </div>
     <div><p class="text-xs font-bold uppercase tracking-[.16em] text-gold">Navegación</p><div class="mt-4 grid gap-3 text-sm text-white/70"><a href="/#servicios" class="hover:text-white">Servicios</a><a href="/#experiencia" class="hover:text-white">Experiencia</a><a href="/blog/" class="hover:text-white">Blog tributario</a></div></div>
     <div><p class="text-xs font-bold uppercase tracking-[.16em] text-gold">Contacto</p><div class="mt-4 grid gap-3 text-sm text-white/70"><a href={SITE.whatsapp()} target="_blank" rel="noopener noreferrer" class="hover:text-white">{SITE.phoneDisplay}</a><a href={`mailto:${SITE.email}`} class="hover:text-white">{SITE.email}</a><span>{SITE.location}</span></div></div>
   </div>
