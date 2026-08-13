@@ -10,9 +10,12 @@
     "check": "astro check",
     "images:og": "node scripts/generate-og.mjs",
     "studio": "sanity dev",
-    "studio:build": "sanity build"
+    "studio:build": "sanity build",
+    "sanity:seed": "sanity exec scripts/seed-sanity.mjs --with-user-token",
+    "sanity:verify": "node scripts/verify-sanity.mjs"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "latest",
     "@astrojs/vercel": "latest",
     "@fortawesome/fontawesome-svg-core": "latest",
@@ -24,11 +27,18 @@
     "@sanity/image-url": "latest",
     "@sanity/vision": "latest",
     "@tailwindcss/vite": "latest",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/react-is": "^19.2.0",
     "astro": "latest",
     "astro-portabletext": "latest",
     "groq": "latest",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-is": "^19.2.8",
     "sanity": "latest",
     "sharp": "latest",
+    "styled-components": "^6.5.2",
     "tailwindcss": "latest"
   },
   "devDependencies": {
